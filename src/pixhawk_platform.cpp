@@ -427,10 +427,6 @@ void PixhawkPlatform::resetTrajectorySetpoint()
 
 void PixhawkPlatform::resetAttitudeSetpoint()
 {
-  px4_attitude_setpoint_.pitch_body = NAN;
-  px4_attitude_setpoint_.roll_body = NAN;
-  px4_attitude_setpoint_.yaw_body = NAN;
-
   px4_attitude_setpoint_.q_d = std::array<float, 4>{0, 0, 0, 1};
   px4_attitude_setpoint_.thrust_body = std::array<float, 3>{0, 0, -min_thrust_};
 }
@@ -812,7 +808,6 @@ void PixhawkPlatform::px4BatteryCallback(const px4_msgs::msg::BatteryStatus::Sha
   battery_msg.current = msg->current_a;
   battery_msg.charge = NAN;
   battery_msg.capacity = msg->capacity;
-  battery_msg.design_capacity = msg->design_capacity;
   battery_msg.percentage = 100.0 * msg->remaining;
   // TODO(miferco97): config file with battery settings
   battery_msg.power_supply_status = sensor_msgs::msg::BatteryState::POWER_SUPPLY_STATUS_UNKNOWN;
